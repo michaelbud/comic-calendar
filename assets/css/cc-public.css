@@ -7,8 +7,17 @@
 
 .cc-comic-display img {
     max-width: 100%;
+    max-height: calc(100vh - 220px);
+    width: auto;
     height: auto;
+    object-fit: contain;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .cc-comic-display img {
+        max-height: calc(100vh - 180px);
+    }
 }
 
 /* Controls */
