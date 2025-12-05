@@ -37,17 +37,33 @@ function cc_resolve_current_comic_id() {
 
     // 4. Check Month Navigation (Get first comic of that month)
     if ( isset($_GET['cc_month']) ) {
-        $q = new WP_Query([
-            'post_type' => 'cc_comic',
-            'posts_per_page' => 1,
-            'orderby' => 'date',
-            'order' => 'ASC', // Crucial: get the first comic of the selected month
-            'date_query' => [[
-                'year'  => date('Y', strtotime($_GET['cc_month'])),
-                'month' => date('m', strtotime($_GET['cc_month'])),
-            ]]
-        ]);
-        if ($q->have_posts()) return $q->posts[0]->ID;
+        $month_raw = sanitize_text_field( wp_unslash( $_GET['cc_month'] ) );
+
+        if ( preg_match( '/^\d{4}-\d{2}$/', $month_raw ) ) {
+            $dt = DateTime::createFromFormat( 'Y-m', $month_raw );
+            $valid_month = $dt && $dt->format( 'Y-m' ) === $month_raw;
+        } else {
+            $valid_month = false;
+        }
+
+        if ( $valid_month ) {
+            $q = new WP_Query([
+                'post_type' => 'cc_comic',
+                'posts_per_page' => 1,
+                'orderby' => 'date',
+                'order' => 'ASC', // Crucial: get the first comic of the selected month
+                'date_query' => [[
+                    'year'  => $dt->format( 'Y' ),
+                    'month' => $dt->format( 'm' ),
+                ]]
+            ]);
+            if ($q->have_posts()) {
+                $comic_id = $q->posts[0]->ID;
+                wp_reset_postdata();
+                return $comic_id;
+            }
+            wp_reset_postdata();
+        }
     }
     
     // 5. Default: Latest Comic
