@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Prevent other plugins from injecting their own social tags when
- * viewing a comic. Jetpack, for example, adds a site-logo fallback
+ * viewing a comic. Jetpack and YOAST SEO, for example, add a site-logo fallback
  * image which can result in two images appearing in the share preview.
  */
 add_action( 'template_redirect', function() {
