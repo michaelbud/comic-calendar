@@ -7,7 +7,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * image which can result in two images appearing in the share preview.
  */
 add_action( 'template_redirect', function() {
-    if ( ! is_page( cc_get_page_id() ) && ! get_query_var( 'cc_comic_id' ) ) {
+    if (
+        ! is_page( cc_get_page_id() )
+        && ! get_query_var( 'cc_comic_id' )
+        && ! is_singular( 'cc_comic' )
+    ) {
         return;
     }
 
@@ -33,17 +37,28 @@ add_action( 'template_redirect', function() {
  * Handle Meta Tags.
  */
 add_action( 'wp_head', function() {
-    // Only run on the Comic Page or if query var is present
-    if ( ! is_page( cc_get_page_id() ) && ! get_query_var( 'cc_comic_id' ) ) {
+    // Only run on the Comic Page, direct comic posts, or if query var is present
+    if (
+        ! is_page( cc_get_page_id() )
+        && ! get_query_var( 'cc_comic_id' )
+        && ! is_singular( 'cc_comic' )
+    ) {
         return;
     }
 
-    $id = cc_resolve_current_comic_id();
+    $id = is_singular( 'cc_comic' ) ? get_queried_object_id() : cc_resolve_current_comic_id();
     if ( ! $id ) return;
 
-    $title = get_the_title( $id );
+    $page_title  = get_the_title( cc_get_page_id() );
+    $comic_title = get_the_title( $id );
+    $title = $comic_title;
+
+    if ( $page_title && $comic_title ) {
+        $title = sprintf( '%s | %s', $page_title, $comic_title );
+    }
+
     $img   = get_the_post_thumbnail_url( $id, 'full' );
-    $url   = cc_get_comic_pretty_url( $id );
+    $url   = is_singular( 'cc_comic' ) ? get_permalink( $id ) : cc_get_comic_pretty_url( $id );
     $desc  = get_the_excerpt( $id ) ?: 'Comic for ' . get_the_date('', $id);
 
     $width = $height = null;
@@ -65,6 +80,7 @@ add_action( 'wp_head', function() {
         echo '<meta property="og:image:height" content="' . esc_attr( $height ) . '" />' . "\n";
     }
     echo '<meta property="og:url" content="' . esc_url($url) . '" />' . "\n";
+    echo '<meta name="twitter:title" content="' . esc_attr($title) . '" />' . "\n";
     echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
     echo '<meta name="twitter:image" content="' . esc_url($img) . '" />' . "\n";
     echo "\n";
@@ -74,10 +90,15 @@ add_action( 'wp_head', function() {
  * Filter Document Title
  */
 add_filter( 'document_title_parts', function( $title ) {
-    if ( is_page( cc_get_page_id() ) ) {
-        $id = cc_resolve_current_comic_id();
+    if ( is_page( cc_get_page_id() ) || is_singular( 'cc_comic' ) ) {
+        $id = is_singular( 'cc_comic' ) ? get_queried_object_id() : cc_resolve_current_comic_id();
         if ( $id ) {
-            $title['title'] = get_the_title( $id );
+            $page_title  = get_the_title( cc_get_page_id() );
+            $comic_title = get_the_title( $id );
+
+            if ( $page_title && $comic_title ) {
+                $title['title'] = sprintf( '%s | %s', $page_title, $comic_title );
+            }
         }
     }
     return $title;
