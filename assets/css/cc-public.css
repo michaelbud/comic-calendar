@@ -102,54 +102,6 @@
     margin: 0 0 6px;
 }
 
-.cc-month-pager {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 300px; /* Keep it centered and tidy */
-    margin: 0 auto 15px;
-    padding: 5px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.cc-month-title {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: 700;
-    text-align: center;
-    flex-grow: 1;
-}
-
-.cc-month-nav {
-    display: inline;
-    font-size: 1.5rem;
-    padding: 5px 10px;
-    line-height: 1;
-    text-decoration: none;
-    color: #333;
-    transition: color 0.2s;
-}
-
-.cc-month-nav:hover {
-    color: #000;
-}
-
-.cc-month-nav.disabled {
-    opacity: 0.3;
-    pointer-events: none;
-    cursor: default;
-}
-
-/* Update Calendar Grid header to look cleaner without the select box */
-.cc-calendar-grid {
-    margin-top: 20px;
-}
-.cc-cal-header {
-    display: none; /* Hide the static title since the pager has the title */
-}
-
-/* --- New Month Pager Styles --- */
-
 /* Ensures the container is centered and clean */
 .cc-controls-container {
     padding: 20px;
@@ -167,7 +119,7 @@
 
 .cc-month-title {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
     flex-grow: 1; /* Pushes the arrows to the sides */
@@ -175,7 +127,7 @@
 }
 
 .cc-month-nav {
-    display: block;
+    display: inline;
     font-size: 1.5rem;
     padding: 5px 10px;
     line-height: 1;
