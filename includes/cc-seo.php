@@ -77,7 +77,12 @@ add_filter( 'document_title_parts', function( $title ) {
     if ( is_page( cc_get_page_id() ) ) {
         $id = cc_resolve_current_comic_id();
         if ( $id ) {
-            $title['title'] = get_the_title( $id );
+            $page_title  = get_the_title( cc_get_page_id() );
+            $comic_title = get_the_title( $id );
+
+            if ( $page_title && $comic_title ) {
+                $title['title'] = sprintf( '%s | %s', $page_title, $comic_title );
+            }
         }
     }
     return $title;
