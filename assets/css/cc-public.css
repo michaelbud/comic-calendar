@@ -95,14 +95,14 @@
 
 .cc-month-title {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: 700;
     text-align: center;
     flex-grow: 1;
 }
 
 .cc-month-nav {
-    display: block;
+    display: inline;
     font-size: 1.5rem;
     padding: 5px 10px;
     line-height: 1;
