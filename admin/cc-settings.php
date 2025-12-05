@@ -8,6 +8,10 @@ add_action( 'admin_init', function() {
     register_setting( 'cc_options_group', 'cc_comic_page_id', array(
         'sanitize_callback' => 'absint' // Sanitize as integer
     ));
+
+    register_setting( 'cc_options_group', 'cc_calendar_title', array(
+        'sanitize_callback' => 'sanitize_text_field'
+    ));
     
     // NEW: Check if we need to flush rewrites (set by the update hook below)
     if ( get_transient( 'cc_flush_rewrites' ) ) {
@@ -66,6 +70,13 @@ function cc_render_settings_page() {
                             Select the page where you have placed the <code>[comic_calendar]</code> shortcode.<br>
                             <strong>Note:</strong> Clicking "Save Changes" will automatically refresh your permalinks.
                         </p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row">Calendar Title</th>
+                    <td>
+                        <input type="text" name="cc_calendar_title" value="<?php echo esc_attr( get_option( 'cc_calendar_title', 'COMIC CALENDAR' ) ); ?>" class="regular-text" />
+                        <p class="description">Text shown above the month navigation (defaults to "COMIC CALENDAR").</p>
                     </td>
                 </tr>
             </table>
