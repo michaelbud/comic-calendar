@@ -1,0 +1,203 @@
+/* Comic Calendar Container */
+.cc-wrapper {
+    max-width: 1000px;
+    margin: 0 auto 2rem;
+    text-align: center;
+}
+
+.cc-comic-display img {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Controls */
+.cc-controls-container {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Navigation Buttons */
+.cc-nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.cc-btn {
+    padding: 8px 16px;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.cc-btn:hover {
+    background: #555;
+    color: #fff;
+}
+
+.cc-btn.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Calendar Grid */
+.cc-calendar-grid table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cc-calendar-grid td {
+    padding: 8px;
+    border: 1px solid #eee;
+}
+
+.cc-calendar-grid td a {
+    font-weight: bold;
+    display: block;
+}
+
+.cc-calendar-grid td.cc-today {
+    background: #333;
+}
+.cc-calendar-grid td.cc-today a {
+    color: #fff;
+}
+.cc-calendar-grid .muted {
+    color: #ccc;
+}
+
+/* --- Month Pager (New) --- */
+
+/* Remove old dropdown form styles */
+.cc-controls-container > form {
+    display: none;
+}
+
+.cc-month-pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px; /* Keep it centered and tidy */
+    margin: 0 auto 15px;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cc-month-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.cc-month-nav {
+    display: block;
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    line-height: 1;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.cc-month-nav:hover {
+    color: #000;
+}
+
+.cc-month-nav.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Update Calendar Grid header to look cleaner without the select box */
+.cc-calendar-grid {
+    margin-top: 20px;
+}
+.cc-cal-header {
+    display: none; /* Hide the static title since the pager has the title */
+}
+
+/* --- New Month Pager Styles --- */
+
+/* Ensures the container is centered and clean */
+.cc-controls-container {
+    padding: 20px;
+}
+
+.cc-month-pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 300px;
+    margin: 0 auto 20px; /* Separates it nicely from the buttons below */
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cc-month-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    flex-grow: 1; /* Pushes the arrows to the sides */
+    color: #333;
+}
+
+.cc-month-nav {
+    display: block;
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    line-height: 1;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s;
+    font-family: Arial, sans-serif; /* Ensures the arrows look consistent */
+}
+
+.cc-month-nav:hover {
+    color: #000;
+}
+
+.cc-month-nav.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Cleanup - Hides the redundant header if it still exists */
+.cc-calendar-grid .cc-cal-header {
+    display: none;
+}
+
+/* --- Random Comic Widget Styles --- */
+.cc-random-comic-widget {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.cc-random-comic-widget img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cc-random-comic-widget .cc-random-comic-title {
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align:center;
+    margin-top:1em;
+}
