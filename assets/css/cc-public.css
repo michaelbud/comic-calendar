@@ -7,7 +7,7 @@
 
 .cc-comic-display img {
     max-width: 100%;
-    max-height: calc(100vh - 220px);
+    max-height: calc(90vh - 300px);
     width: auto;
     height: auto;
     object-fit: contain;
