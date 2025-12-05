@@ -126,19 +126,19 @@ function cc_render_controls( $ids, $current_id, $base_url ) {
  */
 function cc_month_has_comics($month_ym, $all_ids) {
     if (empty($all_ids)) return false;
-    
-    // We check against the first and last comic's month (the range)
-    // Use the actual post date fields for this check to be accurate.
-    $q = new WP_Query([
-        'post_type' => 'cc_comic',
-        'posts_per_page' => 1,
-        'fields' => 'ids',
-        'date_query' => [[
-            'year'  => date('Y', strtotime($month_ym)),
-            'month' => date('m', strtotime($month_ym)),
-        ]]
-    ]);
-    return $q->have_posts();
+
+    static $cached_months = [];
+    $cache_key = md5( implode( '-', $all_ids ) );
+
+    if ( ! isset( $cached_months[ $cache_key ] ) ) {
+        $months = [];
+        foreach ( $all_ids as $pid ) {
+            $months[ get_the_date( 'Y-m', $pid ) ] = true;
+        }
+        $cached_months[ $cache_key ] = $months;
+    }
+
+    return ! empty( $cached_months[ $cache_key ][ $month_ym ] );
 }
 
 

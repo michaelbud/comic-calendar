@@ -24,7 +24,8 @@ class CC_Random_Comic_Widget extends WP_Widget {
      */
     public function widget( $args, $instance ) {
         // Get widget title
-        $title = apply_filters( 'widget_title', $instance['title'] );
+        $raw_title = isset( $instance['title'] ) ? $instance['title'] : '';
+        $title = apply_filters( 'widget_title', $raw_title );
 
         // Start HTML output (Standard WordPress widget wrappers)
         echo $args['before_widget'];
