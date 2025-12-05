@@ -26,7 +26,7 @@ function cc_shortcode_handler( $atts ) {
     $title = get_the_title( $current_id );
     $img   = get_the_post_thumbnail_url( $current_id, 'full' );
     $base_url   = cc_get_page_url();
-    $comic_link = trailingslashit($base_url) . $current_id . '/';
+    $comic_link = cc_get_comic_pretty_url( $current_id, $base_url );
     
     ob_start();
     ?>
@@ -81,12 +81,12 @@ function cc_render_controls( $ids, $current_id, $base_url ) {
     $next_month_url = $has_next_month ? add_query_arg( 'cc_month', $next_month_str, $base_url ) : '#';
     $is_last_month = !$has_next_month;
 
-    // Links (using reliable query parameters)
-    $first_url = add_query_arg( 'cc_comic_id', $first_id, $base_url );
-    $prev_url  = $prev_id ? add_query_arg( 'cc_comic_id', $prev_id, $base_url ) : '#';
-    $rand_url  = add_query_arg( 'cc_comic_id', $rand_id, $base_url );
-    $next_url  = $next_id ? add_query_arg( 'cc_comic_id', $next_id, $base_url ) : '#';
-    $last_url  = add_query_arg( 'cc_comic_id', $last_id, $base_url );
+    // Links (using pretty permalinks)
+    $first_url = cc_get_comic_pretty_url( $first_id, $base_url );
+    $prev_url  = $prev_id ? cc_get_comic_pretty_url( $prev_id, $base_url ) : '#';
+    $rand_url  = cc_get_comic_pretty_url( $rand_id, $base_url );
+    $next_url  = $next_id ? cc_get_comic_pretty_url( $next_id, $base_url ) : '#';
+    $last_url  = cc_get_comic_pretty_url( $last_id, $base_url );
     
     // Render
     ob_start();
@@ -176,8 +176,8 @@ function cc_render_month_grid($all_ids, $current_date, $base_url) {
         
         $html .= '<td class="'.$class.'">';
         if($is_active) {
-            // Use reliable query parameter link
-            $link = add_query_arg( 'cc_comic_id', $month_ids[$d], $base_url );
+            // Use pretty permalinks for comic detail links
+            $link = cc_get_comic_pretty_url( $month_ids[$d], $base_url );
             $html .= '<a href="'.esc_url($link).'">'.$d.'</a>';
         } else {
             $html .= '<span class="muted">'.$d.'</span>';

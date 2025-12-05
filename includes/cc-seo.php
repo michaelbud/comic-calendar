@@ -15,7 +15,7 @@ add_action( 'wp_head', function() {
 
     $title = get_the_title( $id );
     $img   = get_the_post_thumbnail_url( $id, 'full' );
-    $url   = trailingslashit( cc_get_page_url() ) . $id . '/';
+    $url   = cc_get_comic_pretty_url( $id );
     $desc  = get_the_excerpt( $id ) ?: 'Comic for ' . get_the_date('', $id);
 
     // Output clean tags

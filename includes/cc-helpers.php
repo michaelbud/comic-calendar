@@ -10,6 +10,11 @@ function cc_get_page_url() {
     return $id ? get_permalink( $id ) : home_url('/');
 }
 
+function cc_get_comic_pretty_url( $comic_id, $base_url = null ) {
+    $base = $base_url ?: cc_get_page_url();
+    return trailingslashit( trailingslashit( $base ) . intval( $comic_id ) );
+}
+
 function cc_resolve_current_comic_id() {
     // 1. Check Query Var (The Pretty URL way: /comic/123/)
     $qv_id = get_query_var( 'cc_comic_id' );
