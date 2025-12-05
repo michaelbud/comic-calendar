@@ -22,6 +22,11 @@ add_action( 'template_redirect', function() {
     if ( function_exists( 'jetpack_twitter_cards_tag' ) ) {
         remove_action( 'wp_head', 'jetpack_twitter_cards_tag', 3 );
     }
+
+    // Prevent Yoast SEO from injecting fallback logo images into social tags.
+    add_filter( 'wpseo_add_opengraph_images', '__return_empty_array', 99 );
+    add_filter( 'wpseo_opengraph_image', '__return_false', 99 );
+    add_filter( 'wpseo_twitter_image', '__return_false', 99 );
 }, 0 );
 
 /**
@@ -63,9 +68,6 @@ add_action( 'wp_head', function() {
     echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
     echo '<meta name="twitter:image" content="' . esc_url($img) . '" />' . "\n";
     echo "\n";
-
-    // Disable Yoast Images for this specific page request to avoid conflicts
-    add_filter( 'wpseo_opengraph_image', '__return_false', 99 );
 }, 1 );
 
 /**
