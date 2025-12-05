@@ -92,6 +92,16 @@
     display: none;
 }
 
+.cc-calendar-eyebrow {
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0 0 6px;
+}
+
 .cc-month-pager {
     display: flex;
     justify-content: space-between;

@@ -53,6 +53,7 @@ add_shortcode( 'comic_calendar', 'cc_shortcode_handler' );
  */
 function cc_render_controls( $ids, $current_id, $base_url ) {
     $current_date = get_the_date( 'Y-m-d', $current_id );
+    $calendar_title = cc_get_calendar_title();
     
     // --- Nav Button Logic ---
     $index    = array_search( $current_id, $ids );
@@ -92,7 +93,9 @@ function cc_render_controls( $ids, $current_id, $base_url ) {
     ob_start();
     ?>
     <div class="cc-controls-container">
-        
+
+        <div class="cc-calendar-eyebrow"><?php echo esc_html( $calendar_title ); ?></div>
+
         <div class="cc-month-pager">
            
             <h3 class="cc-month-title">

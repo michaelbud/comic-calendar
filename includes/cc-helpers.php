@@ -10,6 +10,11 @@ function cc_get_page_url() {
     return $id ? get_permalink( $id ) : home_url('/');
 }
 
+function cc_get_calendar_title() {
+    $title = get_option( 'cc_calendar_title', 'COMIC CALENDAR' );
+    return $title !== '' ? $title : 'COMIC CALENDAR';
+}
+
 function cc_get_comic_pretty_url( $comic_id, $base_url = null ) {
     $base = $base_url ?: cc_get_page_url();
     return trailingslashit( trailingslashit( $base ) . intval( $comic_id ) );
