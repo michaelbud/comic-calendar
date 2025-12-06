@@ -50,15 +50,12 @@ function cc_save_featured_metabox( $post_id ) {
 add_action( 'save_post_cc_comic', 'cc_save_featured_metabox' );
 
 function cc_add_featured_column( $columns ) {
-    $new_columns = [];
 
-    foreach ( $columns as $key => $label ) {
-        if ( 'title' === $key ) {
-            $new_columns['cc_featured'] = esc_html__( 'Featured', 'comic-calendar' );
-        }
+    // Keep all existing columns in order
+    $new_columns = $columns;
 
-        $new_columns[ $key ] = $label;
-    }
+    // Append your custom column at the end
+    $new_columns['cc_featured'] = esc_html__( 'Star', 'comic-calendar' );
 
     return $new_columns;
 }
