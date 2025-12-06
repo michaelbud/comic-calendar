@@ -27,6 +27,7 @@ require_once CC_PLUGIN_PATH . 'includes/cc-widget-random.php';
 // Include Admin Settings (Only if in admin)
 if ( is_admin() ) {
     require_once CC_PLUGIN_PATH . 'admin/cc-settings.php';
+    require_once CC_PLUGIN_PATH . 'admin/cc-featured.php';
 }
 
 // Activation: Register CPT/Rewrites and Flush
