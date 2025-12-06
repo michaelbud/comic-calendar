@@ -130,7 +130,7 @@ class CC_Random_Comic_Widget extends WP_Widget {
             <select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'comic_selection' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'comic_selection' ) ); ?>">
                 <option value="random" <?php selected( $selection, 'random' ); ?>><?php esc_html_e( 'Random comic', 'comic-calendar' ); ?></option>
                 <option value="latest" <?php selected( $selection, 'latest' ); ?>><?php esc_html_e( 'Latest comic', 'comic-calendar' ); ?></option>
-                <option value="featured" <?php selected( $selection, 'featured' ); ?>><?php esc_html_e( 'Featured comic', 'comic-calendar' ); ?></option>
+                <option value="featured" <?php selected( $selection, 'featured' ); ?>><?php esc_html_e( 'Star comic', 'comic-calendar' ); ?></option>
             </select>
         </p>
         <p>
