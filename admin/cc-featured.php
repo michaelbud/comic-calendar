@@ -13,7 +13,7 @@ function cc_add_featured_metabox() {
 add_action( 'add_meta_boxes', 'cc_add_featured_metabox' );
 
 function cc_add_featured_quick_edit_field( $column_name, $post_type ) {
-    if ( 'cc_comic' !== $post_type || ! in_array( $column_name, array( 'title', 'featured' ), true ) ) {
+    if ( 'cc_comic' !== $post_type || 'title' !== $column_name ) {
         return;
     }
 
@@ -130,15 +130,6 @@ function cc_featured_quick_edit_script() {
                     $editRow.find( 'input[name="cc_featured"]' ).prop( 'checked', isFeatured );
                 }
             };
-
-            $( document ).on( 'change', 'tr.inline-edit-row input[name="cc_featured"]', function() {
-                const $input = $( this );
-                const $row = $input.closest( 'tr.inline-edit-row' );
-
-                $row.find( 'input[name="cc_featured"]' )
-                    .not( $input )
-                    .prop( 'checked', $input.is( ':checked' ) );
-            } );
         } )( jQuery );
     </script>
     <?php
