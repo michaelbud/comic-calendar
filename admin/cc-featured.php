@@ -48,10 +48,6 @@ function cc_render_featured_metabox( $post ) {
 }
 
 function cc_save_featured_metabox( $post_id ) {
-    if ( 'cc_comic' !== get_post_type( $post_id ) ) {
-        return;
-    }
-
     $nonce_valid = false;
 
     if ( isset( $_POST['cc_featured_nonce'] ) && wp_verify_nonce( $_POST['cc_featured_nonce'], 'cc_featured_save_' . $post_id ) ) {
@@ -86,34 +82,7 @@ function cc_save_featured_metabox( $post_id ) {
         delete_post_meta( $post_id, 'cc_featured' );
     }
 }
-add_action( 'save_post', 'cc_save_featured_metabox' );
-
-function cc_add_featured_column( $columns ) {
-    $columns['featured'] = esc_html__( 'Featured', 'comic-calendar' );
-
-    return $columns;
-}
-add_filter( 'manage_edit-cc_comic_columns', 'cc_add_featured_column' );
-
-function cc_render_featured_column( $column, $post_id ) {
-    if ( 'featured' !== $column ) {
-        return;
-    }
-
-    $is_featured = get_post_meta( $post_id, 'cc_featured', true ) === '1';
-
-    echo $is_featured ? '★' : '☆';
-    printf(
-        '<span class="screen-reader-text">%s</span>',
-        esc_html( $is_featured ? __( 'Featured', 'comic-calendar' ) : __( 'Not featured', 'comic-calendar' ) )
-    );
-
-    printf(
-        '<div class="hidden cc-featured-inline-data" data-featured="%1$s"></div>',
-        esc_attr( $is_featured ? '1' : '0' )
-    );
-}
-add_action( 'manage_cc_comic_posts_custom_column', 'cc_render_featured_column', 10, 2 );
+add_action( 'save_post_cc_comic', 'cc_save_featured_metabox' );
 
 function cc_add_featured_class_to_rows( $classes, $class, $post_id ) {
     if ( ! is_admin() ) {
@@ -156,9 +125,7 @@ function cc_featured_quick_edit_script() {
 
                 if ( postId > 0 ) {
                     const $editRow = $( '#edit-' + postId );
-                    const $row = $( '#post-' + postId );
-                    const featuredData = $row.find( '.cc-featured-inline-data' ).data( 'featured' );
-                    const isFeatured = featuredData === '1' || $row.hasClass( 'cc-comic-featured' );
+                    const isFeatured = $( '#post-' + postId ).hasClass( 'cc-comic-featured' );
 
                     $editRow.find( 'input[name="cc_featured"]' ).prop( 'checked', isFeatured );
                 }
