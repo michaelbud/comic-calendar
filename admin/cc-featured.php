@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function cc_add_featured_metabox() {
     add_meta_box(
         'cc_featured_comic',
-        esc_html__( 'Featured Comic', 'comic-calendar' ),
+        esc_html__( 'Star Comic', 'comic-calendar' ),
         'cc_render_featured_metabox',
         'cc_comic',
         'side'
