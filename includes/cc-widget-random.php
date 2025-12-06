@@ -45,7 +45,8 @@ class CC_Random_Comic_Widget extends WP_Widget {
         $query_args = array(
             'post_type'      => 'cc_comic',
             'posts_per_page' => $comic_count,
-            'fields'         => 'ids'
+            'fields'         => 'ids',
+            'no_found_rows'  => true,
         );
 
         if ( 'featured' === $selection ) {
@@ -55,8 +56,7 @@ class CC_Random_Comic_Widget extends WP_Widget {
                     'value' => '1'
                 )
             );
-            $query_args['orderby'] = 'date';
-            $query_args['order']   = 'DESC';
+            $query_args['orderby'] = 'rand';
         } elseif ( 'random' === $selection ) {
             $query_args['orderby'] = 'rand';
         } else {
