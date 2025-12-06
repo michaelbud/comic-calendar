@@ -17,7 +17,7 @@ Modern Navigation: Replaces old dropdowns with a Month Pager (Previous/Next arro
 
 Advanced SEO: Dynamically rewrites the page title and adds crucial Open Graph (OG) and Twitter Card meta tags, pointing them directly to the current comic strip image and description for perfect social media sharing.
 
-Random Comic Widget: Includes a Random Comic sidebar widget to drive discovery across your site.
+Comic Widget: Includes a sidebar widget that can surface a random, featured, or the latest comic to drive discovery across your site.
 
 🛠️ Installation
 1. File Installation (Manual)
@@ -50,6 +50,8 @@ Add the comic image by setting the Featured Image.
 
 Publish the comic. The date it is published will be used for the calendar entry.
 
+To highlight a strip in widgets, check the **Featured Comic** box in the sidebar meta box before publishing or updating.
+
 2. Display
 Simply visit the Page where you placed the [comic_calendar] shortcode. The plugin handles all post querying, navigation, and display logic automatically.
 
@@ -59,6 +61,10 @@ Go to Appearance > Widgets.
 Drag the Random Comic widget into your desired sidebar area.
 
 Set the widget title (e.g., "Need a Laugh?").
+
+Choose whether to display a Random comic, a Featured comic, or the Latest comic in the widget dropdown.
+
+Select how many comics to stack and optionally add pixel spacing between them to control the widget layout.
 
 ❓ Frequently Asked Questions
 The date links or arrows keep taking me back to the latest comic.
