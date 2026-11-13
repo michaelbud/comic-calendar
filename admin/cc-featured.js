@@ -1,3 +1,4 @@
+// JavaScript for featured column in main comic list
 (function( $ ) {
     $(function() {
         if ( typeof ccFeatured === 'undefined' ) {
