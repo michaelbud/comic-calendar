@@ -213,3 +213,25 @@
 }
 .cc-lightbox-close:hover, .cc-lightbox-close:focus-visible { background: rgba(255,255,255,.18); color: #fff; }
 body.cc-lightbox-open { overflow: hidden; }
+
+
+/* Past calendar days with no comic: a tiny subdued X-eye face. */
+.cc-calendar-grid td.cc-missed .cc-missed-date {
+    display: flex;
+    min-height: 30px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: #9b9b9b;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.1;
+}
+.cc-calendar-grid td.cc-missed .cc-missed-face {
+    width: 15px;
+    height: 15px;
+    display: block;
+    opacity: .5;
+    background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='27' fill='none' stroke='%23888888' stroke-width='5'/%3E%3Cpath d='M19 22l10 10m0-10L19 32m16-10l10 10m0-10L35 32M22 43h20' fill='none' stroke='%23888888' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
