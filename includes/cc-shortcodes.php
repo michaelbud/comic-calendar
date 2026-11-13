@@ -173,6 +173,8 @@ function cc_render_month_grid($all_ids, $current_date, $base_url) {
     
     $days_in_month = date('t', strtotime($target_month));
     $start_dow     = date('w', strtotime($target_month . '-01'));
+    // Use the WordPress site's local date; only elapsed empty days get the face.
+    $today = current_time('Y-m-d');
     
     $html = '<div class="cc-calendar-grid">';
     
@@ -189,13 +191,18 @@ function cc_render_month_grid($all_ids, $current_date, $base_url) {
     for($d=1; $d<=$days_in_month; $d++) {
         $is_active = isset($month_ids[$d]);
         $is_curr   = ($d == date('j', strtotime($current_date)));
-        $class     = $is_curr ? 'cc-today' : '';
-        
-        $html .= '<td class="'.$class.'">';
-        if($is_active) {
-            // Use pretty permalinks for comic detail links
+        $day_date = sprintf('%s-%02d', $target_month, $d);
+        $is_past_empty = ! $is_active && $day_date < $today;
+        $class = $is_curr ? 'cc-today' : '';
+        if ( $is_past_empty ) $class .= ' cc-missed';
+
+        $html .= '<td class="'.esc_attr(trim($class)).'">';
+        if ($is_active) {
+            // Keep the calendar link to the comic detail page.
             $link = cc_get_comic_pretty_url( $month_ids[$d], $base_url );
             $html .= '<a href="'.esc_url($link).'">'.$d.'</a>';
+        } elseif ($is_past_empty) {
+            $html .= '<span class="cc-missed-date" aria-label="'.esc_attr('No comic published on ' . $day_date).'">'.$d.'<span class="cc-missed-face" aria-hidden="true"></span></span>';
         } else {
             $html .= '<span class="muted">'.$d.'</span>';
         }
