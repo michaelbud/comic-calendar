@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Comic Calendar
  * Description: A flexible comic management system. Create comics, display them on a calendar, and ensure perfect SEO for every strip.
- * Version: 2.0.0
+ * Version: 2.1.0
  * Author: Michael Bud
  * Text Domain: comic-calendar
  * License: GPL3
