@@ -172,3 +172,44 @@
     text-align:center;
     margin-top:1em;
 }
+
+
+/* Single-comic image enlargement (archive links remain unchanged). */
+.cc-lightbox-trigger { display: inline-block; cursor: zoom-in; }
+.cc-lightbox-trigger:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+.cc-lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 42px 18px 18px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, .92);
+}
+.cc-lightbox-overlay[hidden] { display: none !important; }
+.cc-lightbox-overlay img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 65px);
+    object-fit: contain;
+    box-shadow: none;
+}
+.cc-lightbox-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: #fff;
+    font: 32px/1 Arial, sans-serif;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+}
+.cc-lightbox-close:hover, .cc-lightbox-close:focus-visible { background: rgba(255,255,255,.18); color: #fff; }
+body.cc-lightbox-open { overflow: hidden; }
