@@ -27,15 +27,29 @@ function cc_shortcode_handler( $atts ) {
     $img   = get_the_post_thumbnail_url( $current_id, 'full' );
     $base_url   = cc_get_page_url();
     $comic_link = cc_get_comic_pretty_url( $current_id, $base_url );
+
+    // A numbered permalink is the detail view; on the archive, keep linking to that page.
+    $request_path = trim( (string) wp_parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+    $page_path = trim( (string) wp_parse_url( $base_url, PHP_URL_PATH ), '/' );
+    $is_detail = (int) get_query_var( 'cc_comic_id' ) === (int) $current_id
+        || $request_path === trim( $page_path . '/' . $current_id, '/' )
+        || ( isset( $_GET['cc_comic_id'] ) && (int) $_GET['cc_comic_id'] === (int) $current_id )
+        || ( isset( $_GET['comic'] ) && (int) $_GET['comic'] === (int) $current_id );
     
     ob_start();
     ?>
     <div class="cc-wrapper">
         <?php if ($img): ?>
             <div class="cc-comic-display">
-                <a href="<?php echo esc_url($comic_link); ?>">
-                    <img src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($title); ?>" />
-                </a>
+                <?php if ( $is_detail ): ?>
+                    <a href="<?php echo esc_url( $img ); ?>" class="cc-lightbox-trigger" data-cc-lightbox aria-label="<?php echo esc_attr( sprintf( 'Enlarge comic: %s', $title ) ); ?>">
+                        <img src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( $title ); ?>" />
+                    </a>
+                <?php else: ?>
+                    <a href="<?php echo esc_url( $comic_link ); ?>">
+                        <img src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( $title ); ?>" />
+                    </a>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
     </div>
